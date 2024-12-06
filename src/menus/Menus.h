@@ -8,6 +8,10 @@ typedef enum _MENU {
     MENU_BOOT_MENU,
     MENU_SETUP,
     MENU_SHUTDOWN,
+    MENU_GAME_EASY,
+    MENU_GAME_MEDIUM,
+    MENU_GAME_HARD,
+    MENU_LEVEL
 } MENU;
 
 void StartMenus();

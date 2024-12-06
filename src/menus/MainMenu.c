@@ -27,11 +27,11 @@ static CHAR8 TomatoImage[] = {
         G, G, 0, 0, G, G, G, G, G, G, G, G, 0, 0,
         0, 0, G, G, G, G, G, G, G, G, R, R, G, 0,
         0, 0, R, G, G, R, R, R, R, R, G, R, R, 0,
-        0, R, G, R, R, R, R, W, W, R, R, R, R, R,
-        0, R, R, R, R, R, R, W, W, W, R, R, R, R,
-        0, R, R, R, R, R, R, R, W, W, R, R, R, R,
-        0, R, R, R, R, R, R, R, R, R, R, R, R, R,
-        0, R, R, R, R, R, R, R, R, R, R, R, R, 0,
+        0, R, G, 0, R, R, R, 0, W, R, R, R, R, R,
+        0, R, R, 0, 0, R, 0, 0, W, W, R, R, R, R,
+        0, R, R, 0, R, 0, R, 0, W, W, R, R, R, R,
+        0, R, R, 0, R, R, R, 0, R, R, R, R, R, R,
+        0, R, R, 0, R, R, R, 0, R, R, R, R, R, 0,
         0, 0, R, R, R, R, R, R, R, R, R, R, 0, 0,
         0, 0, 0, R, R, R, R, R, R, R, R, 0, 0, 0,
         0, 0, 0, 0, R, R, R, R, R, R, 0, 0, 0, 0,
@@ -46,6 +46,7 @@ static CHAR8 TomatoImage[] = {
 #define r EFI_LIGHTRED
 #define R EFI_RED
 __attribute__((unused))
+// Matricea asta e folosita
 static CHAR8 TomatoImage2[] = {
         0, 0, 0, 0, 0, 0, 0, 0, G, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, G, 0, 0, 0, 0, 0,
@@ -105,6 +106,7 @@ static void draw() {
     WriteAt(0, 13, "Press B for BOOTMENU");
     WriteAt(0, 14, "Press S for SETUP");
     WriteAt(0, 15, "Press TAB for SHUTDOWN");
+    WriteAt(0, 16, "Press G for GAME");
 
     // draw the logo
     DrawImage(30 + ((width - 30) / 2) - 14, 1, TomatoImage2, 13, 14);
@@ -167,7 +169,9 @@ MENU EnterMainMenu(BOOLEAN first) {
                 return MENU_SETUP;
             } else if(key.ScanCode == CHAR_TAB) {
                 return MENU_SHUTDOWN;
-            }
+            } else if(key.ScanCode == L'g' || key.UnicodeChar == L'G')	{
+		return MENU_LEVEL;
+	    }
 
             // got timeout
         } else {
